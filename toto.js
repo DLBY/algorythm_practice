@@ -110,25 +110,6 @@ fs.readFile(fileName, 'utf8', (error, data) => {
     // let numbers = [...dataCopy];
     // quick_sort(numbers, 0, numbers.length - 1)
     
-    //merge_sort
-    function merge_sort(left, right, dataCopy) {
-      let numbers = [...dataCopy];
-      let arr = [];
-      // Break out of loop if any one of the array gets empty
-      while (left.length && right.length) {
-          // Pick the smaller among the smallest element of left and right sub arrays 
-          if (left[0] < right[0]) {
-              arr.push(left.shift())  
-          } else {
-              arr.push(right.shift()) 
-          }
-      }
-      
-      // Concatenating the leftover elements
-      // (in case we didn't go through the entire left or right array)
-      return [ ...arr, ...left, ...right ]
-  }
-
   });
 
 
