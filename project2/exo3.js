@@ -3,11 +3,11 @@ const checkSum2 = (array, num) => {
   
   for (let i = 0; i < numbers.length; i++) {
     let currentNum = numbers[i]
-    let searchingValue = num - numbers[i]
-    if (numbers.filter(num => num !== currentNum).includes(searchingValue)) return true;
-    return false;
+    let searchingValue = num - currentNum
+    if (numbers.filter(num => numbers.indexOf(num) !== i).includes(searchingValue)) return true;  
+    // on filtre pour exclure le chiffre utilisé (ex:ne pas prendre 2x 10) et indexOf pour que ça fonctionne lorsqu'on modifie l'array
   };
-  console.log(numbers);
+  return false;
 };
 
 console.log(checkSum2([10, 15, 3, 7], 17));
