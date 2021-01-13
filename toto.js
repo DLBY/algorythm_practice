@@ -12,23 +12,39 @@ fs.readFile(fileName, 'utf8', (error, data) => {
 
     const dataCopy = [...data.split(" ").map(num => parseInt(num, 10))];
 
+      bubbleSort(dataCopy);
+      insertionSort(dataCopy);
+      selectionSort(dataCopy);
+      quickSort(dataCopy, 0, dataCopy.length - 1);
+  });
+
+
+// Méthode synchrone
+try {
+    const data = fs.readFileSync(fileName, 'utf8');
+    console.log(data);
+} catch (error) {
+    console.error(error.message);
+}
+
     //bubble sort
-    const bubble_sort = (dataCopy) => {
+    const bubbleSort = (dataCopy) => {
       let numbers = [...dataCopy];
-      let comparaisonsCounter = 0
-      for (let i = 0; i < numbers.length; i++) {
-        for (let j = 1; j < numbers.length-i; j++) {
-          if (numbers[j + 1] < numbers[j]) {
-            [numbers[j + 1], numbers[j]] = [numbers[j], numbers[j + 1]];
-          } comparaisonsCounter++; 
-        }
+      let count = 0
+      for (let i = numbers.length - 1; i > 0; i--) {
+          for (let j = 0; j < i; j++) {
+              count++
+              if (numbers[j + 1] < numbers[j]) {
+                  [numbers[j + 1], numbers[j]] = [numbers[j], numbers[j + 1]];
+              };
+          }
       }
-      return `Tri à bulle/Bubble Sort: ${comparaisonsCounter} comparaisons ${numbers}`
+      console.log(`Tri à bulle: ${count} comparaisons => ${numbers}`);
    }
 // console.log(bubble_sort(dataCopy));
 
   //  insertion_sort
-   const insertion_sort = (dataCopy) => {
+   const insertionSort = (dataCopy) => {
      let numbers = [...dataCopy];
      let count = 0;
     let length = numbers.length;
@@ -36,18 +52,18 @@ fs.readFile(fileName, 'utf8', (error, data) => {
       let key = numbers[i];
       let j = i - 1
       while (j >= 0 && numbers[j] > key) {
-        count++
         numbers[j+1] = numbers[j]
         j = j - 1 ;
+        count++;
       }
       numbers[j+1] = key
     }
-    return `Tri à insertion : ${count} comparaisons - ${numbers}`
+    console.log(`Tri à insertion : ${count} comparaisons - ${numbers}`);
 };
 // console.log(insertion_sort(dataCopy));
 
 //selection sort
-  const selection_sort = (dataCopy) => {
+  const selectionSort = (dataCopy) => {
     let numbers = [...dataCopy];
     let count = 0;
     let length = numbers.length;
@@ -65,7 +81,7 @@ fs.readFile(fileName, 'utf8', (error, data) => {
         numbers[min] = tmp;
       }
     }
-    return `Tri à sélection : ${count} comparaisons ${numbers}`
+    console.log(`Tri à sélection : ${count} comparaisons ${numbers}`);
   }
   // console.log(selection_sort(dataCopy));
 
@@ -82,41 +98,30 @@ fs.readFile(fileName, 'utf8', (error, data) => {
           pivotIndex++;
            // we move to next element
         };
-      }
+      };
       // Putting the pivot value in the middle
       [numbers[pivotIndex], numbers[end]] = [numbers[end], numbers[pivotIndex]] 
       console.log(`Tri rapide : ${count} comparaisons ${numbers.join(" ")}`);
       return pivotIndex;
     };
 
-    const quick_sort = (numbers, start ,end) => {
+    const quickSort = (numbers, start ,end) => {
       
       // Base case or terminating case
       if (start >= end) {
         return;
-      }
+      };
     
     // Returns pivotIndex
     let index = partition(numbers, start, end);
     
     // Recursively apply the same logic to the left and right subnumbersays
     
-    quick_sort(numbers, start, index - 1);
-    quick_sort(numbers, index + 1, end);
+    quickSort(numbers, start, index - 1);
+    quickSort(numbers, index + 1, end);
     
     
     };
 
     // let numbers = [...dataCopy];
     // quick_sort(numbers, 0, numbers.length - 1)
-    
-  });
-
-
-// Méthode synchrone
-try {
-    const data = fs.readFileSync(fileName, 'utf8');
-    console.log(data);
-} catch (error) {
-    console.error(error.message);
-}
