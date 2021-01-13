@@ -1,8 +1,10 @@
 const checkSum2 = (array, num) => {
   let numbers = [...array];
+  
   for (let i = 0; i < numbers.length; i++) {
+    let currentNum = numbers[i]
     let searchingValue = num - numbers[i]
-    if (numbers.includes(searchingValue)) return true;
+    if (numbers.filter(num => num !== currentNum).includes(searchingValue)) return true;
     return false;
   };
   console.log(numbers);

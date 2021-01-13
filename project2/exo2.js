@@ -12,3 +12,4 @@ const getSun = (array) => {
 };
 
 getSun([3, 7, 8, 3, 6, 1]);
+getSun([1, 4, 5, 8]);
